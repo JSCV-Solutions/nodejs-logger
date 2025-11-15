@@ -57,14 +57,14 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 
     ```javascript
     // Using CommonJS
-    const { ConsoleLogger } = require('@jscv-solutions/node-logger');
+    const ConsoleLogger = require('@jscv-solutions/node-logger');
     const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
     ```
 
     ```javascript
 
     // Using ES Modules
-    import { ConsoleLogger } from '@jscv-solutions/node-logger';
+    import ConsoleLogger from '@jscv-solutions/node-logger';
     const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
     ```
 
@@ -88,7 +88,7 @@ you can add `File` transport from Winston as follows:
 
 ```javascript
 // Using CommonJS
-const { ConsoleLogger } = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger');
 const { transports } = require('winston');
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
@@ -98,7 +98,7 @@ logger.add(new transports.File({ filename: 'app.log' }));
 
 ```javascript
 // Using ES Modules
-import { ConsoleLogger } from '@jscv-solutions/node-logger';
+import ConsoleLogger from '@jscv-solutions/node-logger';
 import { transports } from 'winston';
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');

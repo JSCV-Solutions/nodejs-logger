@@ -11,7 +11,7 @@ const upperCaseLevel = format(info => {
     return info;
 });
 
-export class ConsoleLogger {
+export default class ConsoleLogger {
     /**
      * Creates a Winston Logger instance with console transport,
      * which outputs colored logs to the console in the following format:

@@ -4,13 +4,13 @@ import test, { describe } from 'node:test';
 
 import { Logger } from 'winston';
 
-import { ConsoleLogger } from '../src/index.mts';
+import ConsoleLogger from '../src/index.ts';
 
 const require = createRequire(import.meta.url);
 
 void describe('ConsoleLogger', async () => {
     await test('should be exported as CommonJS module', () => {
-        const { ConsoleLogger } = require('../dist/cjs/index.js');
+        const { default: ConsoleLogger } = require('../dist/cjs/index.js');
 
         ok(ConsoleLogger, 'ConsoleLogger should be exported');
         strictEqual(
@@ -21,8 +21,7 @@ void describe('ConsoleLogger', async () => {
     });
 
     await test('should be exported as ES module', async () => {
-        const module = await import('../dist/esm/index.mjs');
-        const { ConsoleLogger } = module;
+        const { default: ConsoleLogger } = await import('../dist/esm/index.js');
 
         ok(ConsoleLogger, 'ConsoleLogger should be exported');
         strictEqual(
