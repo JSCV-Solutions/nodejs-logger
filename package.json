@@ -1,0 +1,77 @@
+{
+  "name": "@jscv-solutions/node-logger",
+  "version": "1.0.0",
+  "description": "Already-configured logger for Node.js applications based on Winston.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "build": "pnpm run build:cjs && pnpm run build:esm",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "lint": "eslint . --ext .ts",
+    "test": "cross-env TS_NODE_PROJECT=tsconfig.tests.json node --require ts-node/esm --test tests/*.spec.ts"
+  },
+  "keywords": [
+    "logger",
+    "winston",
+    "logging",
+    "js",
+    "javascript",
+    "ts",
+    "typescript",
+    "nodejs"
+  ],
+  "author": {
+    "name": "Juansecu",
+    "email": "contact@juansecu.com",
+    "url": "https://github.com/Juansecu"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/JSCV-Solutions/nodejs-logger",
+  "bugs": "https://github.com/JSCV-Solutions/nodejs-logger/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JSCV-Solutions/nodejs-logger"
+  },
+  "engines": {
+    "node": ">=22.18.0",
+    "pnpm": ">=10.15.0"
+  },
+  "packageManager": "pnpm@10.15.0",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "winston": "^3.18.3"
+  },
+  "peerDependenciesMeta": {
+    "winston": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.19.1",
+    "@types/validate-npm-package": "^1.0.3",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "validate-npm-package": "^1.0.5"
+  }
+}
