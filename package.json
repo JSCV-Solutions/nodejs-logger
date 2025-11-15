@@ -9,8 +9,8 @@
     "build": "pnpm run build:cjs && pnpm run build:esm",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:esm": "tsc --project tsconfig.esm.json",
-    "lint": "eslint . --ext .ts",
-    "test": "cross-env TS_NODE_PROJECT=tsconfig.tests.json node --require ts-node/esm --test tests/*.spec.ts"
+    "lint": "eslint . --ext .{mts,ts}",
+    "test": "pnpm run build && cross-env TS_NODE_PROJECT=tsconfig.tests.json node --require ts-node/esm --test tests/*.spec.{mts,ts}"
   },
   "keywords": [
     "logger",

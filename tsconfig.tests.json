@@ -4,6 +4,6 @@
         "allowImportingTsExtensions": true
     },
     "include": [
-        "tests/**/*.ts"
+        "tests/**/*.{mts,ts}"
     ]
 }

@@ -26,5 +26,5 @@
     "types": ["node"],
     "verbatimModuleSyntax": false
   },
-  "exclude": ["node_modules", "dist", "tests"]
+  "exclude": ["node_modules", "dist", "tests", "eslint.config.mts"]
 }

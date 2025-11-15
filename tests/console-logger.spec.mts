@@ -1,13 +1,39 @@
-import { equal, ok } from 'node:assert';
-import test from 'node:test';
+import { equal, ok, strictEqual } from 'node:assert';
+import { createRequire } from 'node:module';
+import test, { describe } from 'node:test';
 
 import { Logger } from 'winston';
 
-import { ConsoleLogger } from '../src/index.ts';
+import { ConsoleLogger } from '../src/index.mts';
 
-test('ConsoleLogger', async t => {
-    await t.test('getLogger', async t => {
-        await t.test('should return a logger instance', () => {
+const require = createRequire(import.meta.url);
+
+void describe('ConsoleLogger', async () => {
+    await test('should be exported as CommonJS module', () => {
+        const { ConsoleLogger } = require('../dist/cjs/index.js');
+
+        ok(ConsoleLogger, 'ConsoleLogger should be exported');
+        strictEqual(
+            typeof ConsoleLogger.getLogger,
+            'function',
+            'ConsoleLogger.getLogger should be a function'
+        );
+    });
+
+    await test('should be exported as ES module', async () => {
+        const module = await import('../dist/esm/index.mjs');
+        const { ConsoleLogger } = module;
+
+        ok(ConsoleLogger, 'ConsoleLogger should be exported');
+        strictEqual(
+            typeof ConsoleLogger.getLogger,
+            'function',
+            'ConsoleLogger.getLogger should be a function'
+        );
+    });
+
+    await describe('getLogger', async () => {
+        await test('should return a logger instance', () => {
             const logger: Logger = ConsoleLogger.getLogger(
                 'TestContext',
                 'debug'
@@ -20,7 +46,7 @@ test('ConsoleLogger', async t => {
             );
         });
 
-        await t.test('should log messages at verbose level', () => {
+        await test('should log messages at verbose level', () => {
             const loggingLevel = 'verbose';
             const logger: Logger = ConsoleLogger.getLogger(
                 'VerboseTest',
@@ -44,7 +70,7 @@ test('ConsoleLogger', async t => {
             );
         });
 
-        await t.test('should only log messages at error level', () => {
+        await test('should only log messages at error level', () => {
             const loggingLevel = 'error';
             const logger: Logger = ConsoleLogger.getLogger(
                 'ErrorTest',
