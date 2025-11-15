@@ -6,13 +6,17 @@ const customFormat = printf(
     ({ level, message, label, timestamp }): string =>
         `${timestamp}     ${level} [${label}] ${message}`
 );
+const upperCaseLevel = format(info => {
+    info.level = info.level.toUpperCase();
+    return info;
+});
 
 export class ConsoleLogger {
     /**
      * Creates a Winston Logger instance with console transport,
      * which outputs colored logs to the console in the following format:
      *
-     * `YYYY-MM-DD HH:mm:ss     level [context] message`
+     * `YYYY-MM-DD HH:mm:ss     LEVEL [context] message`
      *
      * @param context The context label for the logger.
      * @param level The logging level. - **Default:** 'info'
@@ -23,15 +27,16 @@ export class ConsoleLogger {
     ): Logger {
         return createLogger({
             format: combine(
-                colorize({
-                    all: true
-                }),
                 errors({ stack: false }),
                 label({
                     label: context
                 }),
                 timestamp({
                     format: 'YYYY-MM-DD HH:mm:ss'
+                }),
+                upperCaseLevel(),
+                colorize({
+                    all: true
                 }),
                 customFormat
             ),

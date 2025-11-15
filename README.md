@@ -9,11 +9,11 @@ that doesn't use any framework with its built-in logger (e.g., Nest.js).
 
 This package provides a ready-to-use logger based on Winston,
 configured to log messages to the console in a consistent format
-similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     level [context] message`).
+similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 
 > [!WARNING]
 > This project only supports console logging. If you need file logging,
-> please consider opening a Pull Request or using Winston directly.
+> please refer to [adding file logging](#adding-file-logging).
 
 ## Requirements
 
@@ -74,7 +74,34 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     level [context] message`).
 4. Use the logger in your application:
 
     ```javascript
-    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss info [context] This is an info message
-    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss debug [context] This is a debug message
-    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss error [context] This is an error message
+    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
+    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss DEBUG [context] This is a debug message
+    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss ERROR [context] This is an error message
     ```
+
+## Configuration
+
+### Adding File Logging
+
+If you want to add file logging to the existing console logger,
+you can add `File` transport from Winston as follows:
+
+```javascript
+// Using CommonJS
+const { ConsoleLogger } = require('@jscv-solutions/node-logger');
+const { transports } = require('winston');
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
+
+logger.add(new transports.File({ filename: 'app.log' }));
+```
+
+```javascript
+// Using ES Modules
+import { ConsoleLogger } from '@jscv-solutions/node-logger';
+import { transports } from 'winston';
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
+
+logger.add(new transports.File({ filename: 'app.log' }));
+```
