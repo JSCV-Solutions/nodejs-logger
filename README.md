@@ -48,17 +48,17 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 
 ## Usage
 
-1. Install the Node.js Logger package:
+1. Install the Node.js Logger and Winston packages:
 
     ```bash
     # Using NPM
-    npm install @jscv-solutions/node-logger
+    npm install @jscv-solutions/node-logger winston
 
     # Using Yarn
-    yarn add @jscv-solutions/node-logger
+    yarn add @jscv-solutions/node-logger winston
 
     # Using PNPM
-    pnpm install @jscv-solutions/node-logger
+    pnpm install @jscv-solutions/node-logger winston
     ```
 2. Import the `ConsoleLogger` class and use its `getLogger()` method in your Node.js application:
 
