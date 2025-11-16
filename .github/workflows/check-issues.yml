@@ -14,6 +14,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_call:
 
 jobs:
   check-issues:
@@ -44,3 +45,13 @@ jobs:
           name: jscv-solutions-logger
           if-no-files-found: 'error'
           path: dist
+      - name: List artifacts for this run (debug)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Run ID: $GITHUB_RUN_ID"
+          curl -sSL \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
+            | jq .
