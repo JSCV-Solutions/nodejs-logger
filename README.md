@@ -1,5 +1,8 @@
 # Node.js Logger
 
+[![Check Issues](https://img.shields.io/github/actions/workflow/status/JSCV-Solutions/nodejs-logger/check-issues.yml?branch=main&style=flat&logo=github&label=No%20Issues%20Found)](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/check-issues.yml)
+[![Build](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/build.yml)
+
 Already-configured logger for Node.js applications based on Winston.
 
 <details>
