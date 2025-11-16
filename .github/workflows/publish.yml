@@ -44,9 +44,11 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
           name: ${{ steps.substring.outputs.substring }}
+          tag_name: ${{ steps.tag.outputs.tag }}
           generate_release_notes: true
+          body: Version ${{ steps.substring.outputs.substring }} of the package
+          body_path: ./CHANGELOG.md
           draft: false
           prerelease: false
       # Use the build artifact produced by build.yml (triggered from Check Issues)
