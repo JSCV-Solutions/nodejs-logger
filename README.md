@@ -2,6 +2,20 @@
 
 Already-configured logger for Node.js applications based on Winston.
 
+<details>
+    <summary>
+        <strong>Table of contents</strong>
+        (click to open)
+    </summary>
+
+- [The Reason](#the-reason)
+- [Requirements](#requirements)
+    - [For Development](#for-development)
+- [Usage](#usage)
+- [Configuration](#configuration)
+    - [Adding File Logging](#adding-file-logging)
+</details>
+
 ## The Reason
 
 It is really annoying to set up logging for every new Node.js project
@@ -20,7 +34,7 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 - **[Node.js](https://nodejs.org/) -** Version 22.18.0 or higher
 - **[Winston](https://github.com/winstonjs/winston) -** Version 3.18.3 or higher
 
-## For Development
+### For Development
 
 - [EditorConfig](https://editorconfig.org/) - Code style consistency across editors and IDEs
 - [ESLint](https://eslint.org/) - Linting utility for JavaScript and TypeScript
