@@ -15,20 +15,43 @@ jobs:
     # - the triggering event was a tag push (tag name starts with "v")
     if: >
       github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push' &&
-      startsWith(github.event.workflow_run.head_branch, 'v')
+      github.event.workflow_run.event == 'push'
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+      - name: Get tag name
+        id: tag
+        run: |
+          TAG=$(git tag --points-at HEAD | head -n 1)
+          if [ -z "$TAG" ]; then
+            echo "No tag found on HEAD" >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - name: Substring version
+        id: substring
+        uses: bhowell2/github-substring-action@1.0.2
+        with:
+          value: ${{ steps.tag.outputs.tag }}
+          index_of_str: v
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.substring.outputs.substring }}
+          generate_release_notes: true
       # Use the build artifact produced by build.yml (triggered from Check Issues)
       - name: Download build artifact
         uses: actions/download-artifact@v5
         with:
           name: jscv-solutions-logger
           path: dist
+          run-id: ${{ github.event.workflow_run.id }}
       - name: Install PNPM
         uses: pnpm/action-setup@v4
         with:
