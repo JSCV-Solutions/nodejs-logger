@@ -1,5 +1,7 @@
 # Node.js Logger
 
+[![Version NPM](https://img.shields.io/npm/v/@jscv-solutions/node-logger.svg)](https://www.npmjs.com/package/@jscv-solutions/node-logger)
+[![NPM Downloads](https://img.shields.io/npm/dm/@jscv-solutions/node-logger.svg)](https://npmcharts.com/compare/@jscv-solutions/node-logger?minimal=true)
 [![Check Issues](https://img.shields.io/github/actions/workflow/status/JSCV-Solutions/nodejs-logger/check-issues.yml?branch=main&style=flat&logo=github&label=No%20Issues%20Found)](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/check-issues.yml)
 [![Build](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/JSCV-Solutions/nodejs-logger/actions/workflows/build.yml)
 
