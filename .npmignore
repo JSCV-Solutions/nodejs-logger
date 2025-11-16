@@ -1,0 +1,33 @@
+# Do not publish source, tests, or configs
+src
+tests
+
+# Node / package manager stuff
+node_modules
+pnpm-lock.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / editor settings
+.idea
+.vscode
+
+# GitHub / CI configs
+.github
+
+# Build / coverage output
+coverage
+dist-*
+*.tsbuildinfo
+
+# Tooling / configs
+.editorconfig
+.eslintrc*
+eslint.config.*
+.gitignore
+.npmrc
+.prettierrc*
+.prettierignore
+*.config.*.*
+tsconfig*.json
