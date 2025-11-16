@@ -48,10 +48,50 @@ jobs:
           generate_release_notes: true
       # Use the build artifact produced by build.yml (triggered from Check Issues)
       - name: Download build artifact
-        uses: actions/download-artifact@v6
-        with:
-          name: jscv-solutions-logger
-          path: dist
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+
+          echo "Using workflow_run.id: $RUN_ID"
+
+          API_URL="$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts"
+          echo "Listing artifacts from: $API_URL"
+
+          JSON=$(curl -sSL \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$API_URL")
+
+          echo "Artifacts:"
+          echo "$JSON"
+
+          ARTIFACT_ID=$(echo "$JSON" \
+            | jq -r '.artifacts[] | select(.name == "jscv-solutions-logger") | .id' \
+            | head -n 1)
+
+          if [ -z "$ARTIFACT_ID" ]; then
+          echo "Artifact 'jscv-solutions-logger' not found for run $RUN_ID" >&2
+          exit 1
+          fi
+
+          echo "Found artifact id: $ARTIFACT_ID"
+
+          DOWNLOAD_URL="$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip"
+          echo "Downloading from: $DOWNLOAD_URL"
+
+          curl -sSL \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$DOWNLOAD_URL" \
+            -o artifact.zip
+
+          mkdir -p dist
+          unzip -o artifact.zip -d dist
+          rm artifact.zip
+
+          echo "Artifact downloaded and extracted into dist/"
       - name: Install PNPM
         uses: pnpm/action-setup@v4
         with:
