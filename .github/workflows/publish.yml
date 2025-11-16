@@ -19,6 +19,7 @@ jobs:
       startsWith(github.event.workflow_run.head_branch, 'v')
     permissions:
       contents: read
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -40,4 +41,4 @@ jobs:
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm publish --no-git-checks --access public
+        run: npm publish --provenance --access public
