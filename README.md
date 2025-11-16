@@ -14,6 +14,7 @@ Already-configured logger for Node.js applications based on Winston.
 - [Usage](#usage)
 - [Configuration](#configuration)
     - [Configuring Global Log Level](#configuring-global-log-level)
+    - [Setting Custom Log Level per Logger After Setting Up Global Log Level](#setting-custom-log-level-per-logger-after-setting-up-global-log-level)
     - [Adding File Logging](#adding-file-logging)
 </details>
 
@@ -93,6 +94,48 @@ before starting your Node.js application:
 ```bash
 export LOGGING_LEVEL='<LOG_LEVEL>'
 node your-app.js
+```
+
+Replace `<LOG_LEVEL>` with the desired log level
+(e.g., 'info', 'debug', 'error').
+
+Then, you can get loggers without specifying the log level explicitly:
+
+```javascript
+// Using CommonJS
+const ConsoleLogger = require('@jscv-solutions/node-logger');
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
+```
+
+```javascript
+// Using ES Modules
+import ConsoleLogger from '@jscv-solutions/node-logger';
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
+```
+
+### Setting Custom Log Level per Logger After Setting Up Global Log Level
+
+If you want to set a custom log level for a specific logger
+after configuring the global log level, you can do so as follows:
+
+```javascript
+// Using CommonJS
+const ConsoleLogger = require('@jscv-solutions/node-logger');
+const { transports } = require('winston');
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
+
+logger.level = '<CUSTOM_LOG_LEVEL>';
+```
+
+```javascript
+// Using ES Modules
+import ConsoleLogger from '@jscv-solutions/node-logger';
+import { transports } from 'winston';
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
+
+logger.level = '<CUSTOM_LOG_LEVEL>';
 ```
 
 ### Adding File Logging
