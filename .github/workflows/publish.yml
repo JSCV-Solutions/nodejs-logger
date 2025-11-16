@@ -1,0 +1,43 @@
+name: Publish
+
+on:
+  workflow_run:
+    workflows: ['Check Issues']
+    types:
+      - completed
+
+jobs:
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+    # Only publish when:
+    # - "Check Issues" finished successfully
+    # - the triggering event was a tag push (tag name starts with "v")
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      startsWith(github.event.workflow_run.head_branch, 'v')
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      # Use the build artifact produced by build.yml (triggered from Check Issues)
+      - name: Download build artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: jscv-solutions-logger
+          path: dist
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10.15.0'
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.18.0'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm publish --no-git-checks --access public
