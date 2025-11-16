@@ -53,6 +53,7 @@ jobs:
           name: jscv-solutions-logger
           path: dist
           run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${ github.token }
       - name: Install PNPM
         uses: pnpm/action-setup@v4
         with:
