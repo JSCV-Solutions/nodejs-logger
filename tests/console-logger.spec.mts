@@ -86,5 +86,19 @@ void describe('ConsoleLogger', async () => {
                 'Logger level should be set to error'
             );
         });
+
+        await test('should configure logger with the "LOGGING_LEVEL" env variable', async () => {
+            process.env['LOGGING_LEVEL'] = 'debug';
+
+            const logger: Logger = ConsoleLogger.getLogger('EnvVarTest');
+
+            logger.debug('This is a debug message set by env variable.');
+
+            equal(
+                logger.level,
+                'debug',
+                'Logger level should be set to debug from env variable'
+            );
+        });
     });
 });

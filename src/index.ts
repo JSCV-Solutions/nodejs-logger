@@ -25,6 +25,8 @@ export default class ConsoleLogger {
         context: string,
         level: keyof CliConfigSetLevels = 'info'
     ): Logger {
+        const loggingLevel: string | undefined = process.env['LOGGING_LEVEL'];
+
         return createLogger({
             format: combine(
                 errors({ stack: false }),
@@ -40,7 +42,7 @@ export default class ConsoleLogger {
                 }),
                 customFormat
             ),
-            level: level as string,
+            level: loggingLevel || (level as string),
             levels: config.cli.levels,
             transports: [new transports.Console()]
         });

@@ -13,6 +13,7 @@ Already-configured logger for Node.js applications based on Winston.
     - [For Development](#for-development)
 - [Usage](#usage)
 - [Configuration](#configuration)
+    - [Configuring Global Log Level](#configuring-global-log-level)
     - [Adding File Logging](#adding-file-logging)
 </details>
 
@@ -82,6 +83,17 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
     ```
 
 ## Configuration
+
+### Configuring Global Log Level
+
+You can configure the global log level for all loggers
+by setting the `LOGGING_LEVEL` environment variable
+before starting your Node.js application:
+
+```bash
+export LOGGING_LEVEL='<LOG_LEVEL>'
+node your-app.js
+```
 
 ### Adding File Logging
 
