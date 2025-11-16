@@ -47,6 +47,8 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag }}
           name: ${{ steps.substring.outputs.substring }}
           generate_release_notes: true
+          draft: false
+          prerelease: false
       # Use the build artifact produced by build.yml (triggered from Check Issues)
       - name: Download build artifact
         env:
