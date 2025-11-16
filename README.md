@@ -29,19 +29,7 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 
 ## Usage
 
-1. Install Winston if you haven't already:
-
-    ```bash
-    # Using NPM
-    npm install winston
-
-    # Using Yarn
-    yarn add winston
-
-    # Using PNPM
-    pnpm install winston
-    ```
-2. Install the Node.js Logger package:
+1. Install the Node.js Logger package:
 
     ```bash
     # Using NPM
@@ -53,7 +41,7 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
     # Using PNPM
     pnpm install @jscv-solutions/node-logger
     ```
-3. Import the `ConsoleLogger` class and use its `getLogger()` method in your Node.js application:
+2. Import the `ConsoleLogger` class and use its `getLogger()` method in your Node.js application:
 
     ```javascript
     // Using CommonJS
@@ -71,7 +59,7 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
     **Note:** Replace `<COMPONENT_NAME>` with the name
     of your component (e.g., 'MyApp'), and `<LOG_LEVEL>` with the desired
     log level (e.g., 'info', 'debug', 'error').
-4. Use the logger in your application:
+3. Use the logger in your application:
 
     ```javascript
     logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
