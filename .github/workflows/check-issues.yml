@@ -12,6 +12,8 @@ on:
       - reopened
       - synchronize
   push:
+    branches:
+      - main
     tags:
       - 'v*.*.*'
   workflow_call:
