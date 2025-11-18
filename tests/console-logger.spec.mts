@@ -61,6 +61,7 @@ void describe('ConsoleLogger', async () => {
             logger.prompt('This is a prompt message.');
             logger.verbose('Hello world at verbose level!');
             logger.input('This is an input message that should not appear.');
+            console.log();
 
             equal(
                 logger.level,
@@ -79,6 +80,7 @@ void describe('ConsoleLogger', async () => {
             logger.error('This is an error message.');
             logger.warn('This is a warning message that should not appear.');
             logger.info('This is an info message that should not appear.');
+            console.log();
 
             equal(
                 logger.level,
@@ -93,12 +95,67 @@ void describe('ConsoleLogger', async () => {
             const logger: Logger = ConsoleLogger.getLogger('EnvVarTest');
 
             logger.debug('This is a debug message set by env variable.');
+            console.log();
 
             equal(
                 logger.level,
                 'debug',
                 'Logger level should be set to debug from env variable'
             );
+
+            delete process.env['LOGGING_LEVEL'];
+        });
+
+        await test('should configure logger with the custom built-in set of levels using the "shouldUseCustomLogLevels" parameter', async () => {
+            const logger: Logger = ConsoleLogger.getLogger(
+                'EnvVarTest',
+                'verbose',
+                true
+            );
+
+            logger.error('This is an error message.');
+            logger.warn('This is a warning message.');
+            logger.help('This is a help message.');
+            logger.data('This is a data message.');
+            logger.info('Hello world at info level!');
+            logger.verbose('Hello world at verbose level!');
+            logger.debug(
+                'This is a debug message set by env variable that should not appear.'
+            );
+            console.log();
+
+            equal(
+                logger.level,
+                'verbose',
+                'Logger level should be set to debug from env variable'
+            );
+        });
+
+        await test('should configure logger with the custom built-in set of levels using the "SHOULD_USE_CUSTOM_LOG_LEVELS" env variable', async () => {
+            process.env['LOGGING_LEVEL'] = 'verbose';
+            process.env['SHOULD_USE_CUSTOM_LOG_LEVELS'] = 'true';
+
+            const logger: Logger = ConsoleLogger.getLogger('EnvVarTest');
+
+            logger.error('This is an error message.');
+            logger.warn('This is a warning message.');
+            logger.help('This is a help message.');
+            logger.data('This is a data message.');
+            logger.info('Hello world at info level!');
+            logger.verbose('Hello world at verbose level!');
+            logger.debug(
+                'This is a debug message set by env variable that should not appear.'
+            );
+            console.log();
+
+            equal(
+                logger.level,
+                'verbose',
+                'Logger level should be set to debug from env variable'
+            );
+
+            delete process.env['LOGGING_LEVEL'];
+            delete process.env['SHOULD_USE_CUSTOM_LOG_LEVELS'];
         });
     });
 });

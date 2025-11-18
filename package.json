@@ -1,6 +1,6 @@
 {
   "name": "@jscv-solutions/node-logger",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Already-configured logger for Node.js applications based on Winston.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

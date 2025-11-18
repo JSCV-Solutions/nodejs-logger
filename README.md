@@ -19,6 +19,7 @@ Already-configured logger for Node.js applications based on Winston.
 - [Configuration](#configuration)
     - [Configuring Global Log Level](#configuring-global-log-level)
     - [Setting Custom Log Level per Logger After Setting Up Global Log Level](#setting-custom-log-level-per-logger-after-setting-up-global-log-level)
+    - [Using Custom Built-In Logging Levels](#using-custom-built-in-logging-levels)
     - [Adding File Logging](#adding-file-logging)
 </details>
 
@@ -82,9 +83,9 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 3. Use the logger in your application:
 
     ```javascript
-    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
-    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss DEBUG [context] This is a debug message
-    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss ERROR [context] This is an error message
+    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
+    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss     DEBUG [context] This is a debug message
+    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
     ```
 
 ## Configuration
@@ -140,6 +141,109 @@ import { transports } from 'winston';
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
 
 logger.level = '<CUSTOM_LOG_LEVEL>';
+```
+
+### Using Custom Built-In Logging Levels
+
+This package includes a custom set of levels out of the box.
+Why? Because verbose-related logs should be visible
+(even if debug logs should not appear).
+
+This is what the custom set of levels looks like:
+
+```javascript
+const customLogLevels = {
+    colors: {
+        error: 'red',
+        warn: 'yellow',
+        help: 'cyan',
+        data: 'grey',
+        info: 'green',
+        verbose: 'cyan',
+        debug: 'blue',
+        prompt: 'grey',
+        input: 'grey',
+        silly: 'magenta'
+    },
+    levels: {
+        error: 0,
+        warn: 1,
+        help: 2,
+        data: 3,
+        info: 4,
+        verbose: 5,
+        debug: 6,
+        prompt: 7,
+        input: 8,
+        silly: 9
+    }
+};
+```
+
+The only difference from the set of logging levels from Winston
+is the severity for the `verbose` level. Everything else
+remains to be the same as in Winston (even the colors).
+
+> **Note:** The custom built-in logging levels is disabled by default.
+
+For using this custom set of logging levels,
+you can either set the `shouldUseCustomLogLevels` parameter
+from the `getLogger()` method to `true`:
+
+```javascript
+// Using CommonJS
+const ConsoleLogger = require('@jscv-solutions/node-logger');
+const { transports } = require('winston');
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>', true);
+
+logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
+logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss     WARN [context] This is a warning message
+logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss     HELP [context] This is a help message
+logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss     DATA [context] This is a data message
+logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
+logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss     VERBOSE [context] This is a verbose message
+logger.debug('This is a debug message that will not appear');
+```
+
+```javascript
+// Using ES Modules
+import ConsoleLogger from '@jscv-solutions/node-logger');
+import { transports } from 'winston';
+
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>', true);
+
+logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
+logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss     WARN [context] This is a warning message
+logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss     HELP [context] This is a help message
+logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss     DATA [context] This is a data message
+logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
+logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss     VERBOSE [context] This is a verbose message
+logger.debug('This is a debug message that will not appear');
+```
+
+Or you can configure it globally setting the `SHOULD_USE_CUSTOM_LOG_LEVELS`
+environment variable to `true`:
+
+```bash
+export LOGGING_LEVEL='verbose'
+export SHOULD_USE_CUSTOM_LOG_LEVELS='true'
+node your-app.js
+```
+
+Then, you can get loggers without specifying
+the `shouldUseCustomLogLevels` parameter explicitly:
+
+```javascript
+// Using CommonJS
+const ConsoleLogger = require('@jscv-solutions/node-logger');
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
+```
+
+```javascript
+// Using ES Modules
+import ConsoleLogger from '@jscv-solutions/node-logger';
+const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
 ```
 
 ### Adding File Logging
