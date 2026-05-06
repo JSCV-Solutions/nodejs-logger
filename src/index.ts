@@ -13,7 +13,7 @@ type LoggingLevels = keyof CliConfigSetLevels;
 const { colorize, combine, errors, label, printf, timestamp } = format;
 const customFormat = printf(
     ({ level, message, label, timestamp }): string =>
-        `${timestamp}     ${level} [${label}] ${message}`
+        `${timestamp}${' '.repeat(18 - level.length)}${level} [${label}] ${message}`
 );
 const customLogLevels: CustomLogLevels = {
     colors: {
