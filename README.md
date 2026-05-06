@@ -30,7 +30,7 @@ that doesn't use any framework with its built-in logger (e.g., Nest.js).
 
 This package provides a ready-to-use logger based on Winston,
 configured to log messages to the console in a consistent format
-similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
+similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss LEVEL [context] message`).
 
 > [!WARNING]
 > This project only supports console logging. If you need file logging,
@@ -83,9 +83,9 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss     LEVEL [context] message`).
 3. Use the logger in your application:
 
     ```javascript
-    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
-    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss     DEBUG [context] This is a debug message
-    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
+    logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
+    logger.debug('This is a debug message'); // YYYY-MM-DD HH:mm:ss DEBUG [context] This is a debug message
+    logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss ERROR [context] This is an error message
     ```
 
 ## Configuration
@@ -197,12 +197,12 @@ const { transports } = require('winston');
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>', true);
 
-logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
-logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss     WARN [context] This is a warning message
-logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss     HELP [context] This is a help message
-logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss     DATA [context] This is a data message
-logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
-logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss     VERBOSE [context] This is a verbose message
+logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss ERROR [context] This is an error message
+logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss WARN [context] This is a warning message
+logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss HELP [context] This is a help message
+logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss DATA [context] This is a data message
+logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
+logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss VERBOSE [context] This is a verbose message
 logger.debug('This is a debug message that will not appear');
 ```
 
@@ -213,12 +213,12 @@ import { transports } from 'winston';
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>', true);
 
-logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss     ERROR [context] This is an error message
-logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss     WARN [context] This is a warning message
-logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss     HELP [context] This is a help message
-logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss     DATA [context] This is a data message
-logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss     INFO [context] This is an info message
-logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss     VERBOSE [context] This is a verbose message
+logger.error('This is an error message'); // YYYY-MM-DD HH:mm:ss ERROR [context] This is an error message
+logger.warn('This is a warning message'); // YYYY-MM-DD HH:mm:ss WARN [context] This is a warning message
+logger.help('This is a help message'); // YYYY-MM-DD HH:mm:ss HELP [context] This is a help message
+logger.data('This is a data message'); // YYYY-MM-DD HH:mm:ss DATA [context] This is a data message
+logger.info('This is an info message'); // YYYY-MM-DD HH:mm:ss INFO [context] This is an info message
+logger.verbose('This is a verbose message'); // YYYY-MM-DD HH:mm:ss VERBOSE [context] This is a verbose message
 logger.debug('This is a debug message that will not appear');
 ```
 

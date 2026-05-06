@@ -51,7 +51,7 @@ export default class ConsoleLogger {
      * Creates a Winston Logger instance with console transport,
      * which outputs colored logs to the console in the following format:
      *
-     * `YYYY-MM-DD HH:mm:ss     LEVEL [context] message`
+     * `YYYY-MM-DD HH:mm:ss LEVEL [context] message`
      *
      * @param context The context label for the logger.
      * @param level The logging level. - **Default:** `'info'`
