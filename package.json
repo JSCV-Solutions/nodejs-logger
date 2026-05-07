@@ -7,8 +7,8 @@
   "types": "dist/esm/index.d.ts",
   "scripts": {
     "build": "pnpm run build:cjs && pnpm run build:esm",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build:esm": "tsc --project tsconfig.esm.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json && node scripts/rename-cjs.js",
+    "build:esm": "tsc --project tsconfig.esm.json && node scripts/rename-esm.js",
     "lint": "eslint . --ext .{mts,ts}",
     "test": "pnpm run build && cross-env TS_NODE_PROJECT=tsconfig.tests.json node --require ts-node/esm --test tests/*.spec.{mts,ts}"
   },
@@ -41,9 +41,9 @@
   "packageManager": "pnpm@10.15.0",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/esm/index.d.mts"
     },
     "./package.json": "./package.json"
   },

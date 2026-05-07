@@ -4,13 +4,14 @@ import test, { describe } from 'node:test';
 
 import { Logger } from 'winston';
 
+// @ts-expect-error The file must contain its extension, otherwise the test suit will fail to run
 import ConsoleLogger from '../src/index.ts';
 
 const require = createRequire(import.meta.url);
 
 void describe('ConsoleLogger', async () => {
     await test('should be exported as CommonJS module', () => {
-        const { default: ConsoleLogger } = require('../dist/cjs/index.js');
+        const { default: ConsoleLogger } = require('../dist/cjs/index.cjs');
 
         ok(ConsoleLogger, 'ConsoleLogger should be exported');
         strictEqual(
@@ -21,7 +22,9 @@ void describe('ConsoleLogger', async () => {
     });
 
     await test('should be exported as ES module', async () => {
-        const { default: ConsoleLogger } = await import('../dist/esm/index.js');
+        const { default: ConsoleLogger } = await import(
+            '../dist/esm/index.mjs'
+        );
 
         ok(ConsoleLogger, 'ConsoleLogger should be exported');
         strictEqual(
