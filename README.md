@@ -66,7 +66,7 @@ similar to Nest.js' logger (`YYYY-MM-DD HH:mm:ss LEVEL [context] message`).
 
     ```javascript
     // Using CommonJS
-    const ConsoleLogger = require('@jscv-solutions/node-logger');
+    const ConsoleLogger = require('@jscv-solutions/node-logger').default;
     const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
     ```
 
@@ -108,7 +108,7 @@ Then, you can get loggers without specifying the log level explicitly:
 
 ```javascript
 // Using CommonJS
-const ConsoleLogger = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger').default;
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
 ```
 
@@ -125,7 +125,7 @@ after configuring the global log level, you can do so as follows:
 
 ```javascript
 // Using CommonJS
-const ConsoleLogger = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger').default;
 const { transports } = require('winston');
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
@@ -192,7 +192,7 @@ from the `getLogger()` method to `true`:
 
 ```javascript
 // Using CommonJS
-const ConsoleLogger = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger').default;
 const { transports } = require('winston');
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>', true);
@@ -236,7 +236,7 @@ the `shouldUseCustomLogLevels` parameter explicitly:
 
 ```javascript
 // Using CommonJS
-const ConsoleLogger = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger').default;
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>');
 ```
 
@@ -253,7 +253,7 @@ you can add `File` transport from Winston as follows:
 
 ```javascript
 // Using CommonJS
-const ConsoleLogger = require('@jscv-solutions/node-logger');
+const ConsoleLogger = require('@jscv-solutions/node-logger').default;
 const { transports } = require('winston');
 
 const logger = ConsoleLogger.getLogger('<COMPONENT_NAME>', '<LOG_LEVEL>');
